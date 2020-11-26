@@ -8,3 +8,5 @@ Target functions:
 3. Retrieve a file from the master storage.
 4. Delete a file in the master storage.
 5. (Extra) Develop a GUI.
+
+The data structures and functions are outlined in "EC504Project2.pdf".
