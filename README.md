@@ -7,4 +7,4 @@ Target functions:
 2. List all files in the master storage.
 3. Retrieve a file from the master storage.
 4. Delete a file in the master storage.
-Extra. Develop a GUI.
+5. (Extra) Develop a GUI.
