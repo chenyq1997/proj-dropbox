@@ -20,13 +20,6 @@ class Chunk
     Chunk * next;
 };
 
-class File
-{
-  public:
-    Chunk * first;
-    int padded; //Indicates whether the last chunk is padded
-};
-
 class chunkname
 {
   public:
@@ -52,7 +45,8 @@ class filename
 {
   public:
     char name[256]; //Key - name of the input file (256B is most File System's max file name length)
-    File *file; //Corresponding File structure, which in turn points to the first chunk included in the file
+    Chunk * first;
+    int padded; //Indicates whether the last chunk is paddede
     UT_hash_handle hh;  //Per the format of uthash
     
     /** CONSTRUCTORS **/

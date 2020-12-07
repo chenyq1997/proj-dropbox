@@ -26,7 +26,6 @@ filename::filename(){}
 filename::filename(char actual_name[])
 {
   strcpy(name, actual_name);  //Copy final hash value to chunk
-  file = NULL;
 }
 
 /** DICT OPERATIONS **/
