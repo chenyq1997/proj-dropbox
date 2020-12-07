@@ -1,0 +1,62 @@
+-统一接口（string v. char[]等等）
+Load(文件):
+
+	Chunk* prev = NULL	//记录上一个Chunk的地址
+
+	新建一个filename结构，name成员就是这个文件的名字，padded默认0
+	
+	prev = first成员的地址
+	
+	while(剩余长度>chunk长度):
+		split(剩余)
+		把得到的chunk取哈希值
+		if(哈希值不在chunkname_dict里):
+			新建一个chunkname结构，name成员就是这个哈希值
+			将这个chunkname结构插入到chunkname_dict里，对应的值设为1
+		else:
+			将对应的值+1
+		新建一个Chunk结构，name成员就是这个哈希值
+		prev->next = 这个Chunk的地址
+		prev = 这个Chunk的地址
+			
+	if(剩余长度<chunk长度):
+		pad(剩余)
+		padded成员=1
+		
+	对剩余取哈希值
+	if(哈希值不在chunkname_dict里):
+		新建一个chunkname结构，name成员就是这个哈希值，count成员=1
+		将这个chunkname结构插入到chunkname_dict里
+	else:
+		将对应的值+1
+	新建一个Chunk结构，name成员就是这个哈希值
+	prev->next = 这个Chunk的地址
+	prev = 这个Chunk的地址			
+
+Retrieve(文件名):
+	按照输入文件名在filename_dict里查找是否有该项
+	如果没有->输出错误信息
+	如果有:
+		Chunk* chunkptr = 找到的filename结构->first
+		读取chunkptr->name作为名字的文件，把内容复制到output作为名字的文件里
+		while(chunkptr->next != NULL):
+			output = merge(output, chunkptr->next->name)
+		//现在应该是到最后一个Chunk
+		if(找到的filename结构->padded == 1):
+			depad(chunkptr)
+		output = merge(output, chunkptr->name)
+		把output更名为输入的文件名
+		返回output
+		
+Delete(文件名):
+	按照输入文件名在filename_dict里查找是否有该项
+	如果没有->输出错误信息
+	如果有:
+		Chunk* chunkptr = 找到的filename结构->first
+		while(chunkptr != NULL):
+			在chunkname_dict里把chunkptr->name对应的chunkname下的count-1
+			if(count == 0):
+				把chunkptr->name作为名字的文件删除
+				在chunkname_dict里把chunkptr->name这一项删除
+	在filename_dict中把输入文件名对应项删除
+		
