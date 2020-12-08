@@ -16,10 +16,8 @@ void pad(string chunkname)
 	ifstream infile;
 	string s = "data/SampleInputForProjectII/";
 	string s1=s.append(chunkname);
-	s.append("_add.txt");
-	path_out = s.c_str();
 	path = s1.append(".txt").c_str();
-	
+	path_out = s1.c_str();
 	cout<<path<<endl;
 	
 	string chunk;
@@ -52,11 +50,10 @@ void depad(string chunkname)
 	ifstream infile;
 	string s = "data/SampleInputForProjectII/";
 	string s1=s.append(chunkname);
-	s.append("_depad.txt");
 	
 	// check if there is an add file
-	path_out = s.c_str();
-	path = s1.append("_add.txt").c_str();
+	path = s1.append(".txt").c_str();
+	path_out = s1.c_str();
 	string chunk;
 	infile.open(path);
 	if(!infile){
@@ -94,8 +91,8 @@ void depad(string chunkname)
 		cout<<chunk<<endl;
 	}
 	
-	outfile.close();
 	outfile<< chunk<<endl;
+	outfile.close();
 }
 
 int main(){
