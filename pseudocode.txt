@@ -59,4 +59,5 @@ Delete(文件名):
 				把chunkptr->name作为名字的文件删除
 				在chunkname_dict里把chunkptr->name这一项删除
 	在filename_dict中把输入文件名对应项删除
+
 		
