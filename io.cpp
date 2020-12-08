@@ -10,8 +10,9 @@
 using namespace std;
 const int chunk_len = 100;
 
-void pad(string chunkname)
+void pad(char *a)
 {
+	string chunkname(&a[0],&a[strlen(a)]);
 	const char *path_out,*path;
 	ifstream infile;
 	string s = "data/SampleInputForProjectII/";
@@ -114,11 +115,9 @@ int main(){
 		outfile<<s<<endl;
 	}
 	infile1.close();
-*/	
 
 	string chunkname;
 	int i = 1;
-	
 	while(i<=chunk_number){
 		chunkname = "chunk";
 		ostringstream c;
@@ -141,4 +140,7 @@ int main(){
 		cout<<endl;
 		i++;
 	}
+*/	
+	char c[] = "chunk2";
+	pad(c);
 }
