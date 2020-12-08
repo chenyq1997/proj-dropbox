@@ -11,8 +11,9 @@ Load(文件):
 		split(剩余)
 		把得到的chunk取哈希值
 		if(哈希值不在chunkname_dict里):
-			新建一个chunkname结构，name成员就是这个哈希值
-			将这个chunkname结构插入到chunkname_dict里，对应的值设为1
+			新建一个chunkname结构，name成员就是这个哈希值，count成员=1
+			将这个chunkname结构插入到chunkname_dict里
+			以得到的哈希值作为名字，把这段数据保存进文件系统
 		else:
 			将对应的值+1
 		新建一个Chunk结构，name成员就是这个哈希值
@@ -27,11 +28,10 @@ Load(文件):
 	if(哈希值不在chunkname_dict里):
 		新建一个chunkname结构，name成员就是这个哈希值，count成员=1
 		将这个chunkname结构插入到chunkname_dict里
+		以得到的哈希值作为名字，把这段数据保存进文件系统		
 	else:
 		将对应的值+1
 	新建一个Chunk结构，name成员就是这个哈希值
-	prev->next = 这个Chunk的地址
-	prev = 这个Chunk的地址			
 
 Retrieve(文件名):
 	按照输入文件名在filename_dict里查找是否有该项
