@@ -4,22 +4,24 @@
 #include <fstream>
 #include <cstring>
 #include <sstream>
+#include "pad.h"
 
-#define FILL1 'd'
+#define FILL1 '0'
 #define FILL2 '1'
 using namespace std;
 const int chunk_len = 100;
+void pad(char *a);
+void depad(char *a);
 
-void pad(string chunkname)
+void pad(char *a)
 {
+	string chunkname(&a[0],&a[strlen(a)]);
 	const char *path_out,*path;
 	ifstream infile;
 	string s = "data/SampleInputForProjectII/";
 	string s1=s.append(chunkname);
-	s.append("_add.txt");
-	path_out = s.c_str();
 	path = s1.append(".txt").c_str();
-	
+	path_out = s1.c_str();
 	cout<<path<<endl;
 	
 	string chunk;
@@ -46,17 +48,17 @@ void pad(string chunkname)
 	infile.close();
 	outfile<< chunk<<endl;
 }
-void depad(string chunkname)
+void depad(char *a)
 {
+	string chunkname(&a[0],&a[strlen(a)]);
 	const char *path_out,*path;
 	ifstream infile;
 	string s = "data/SampleInputForProjectII/";
 	string s1=s.append(chunkname);
-	s.append("_depad.txt");
 	
 	// check if there is an add file
-	path_out = s.c_str();
-	path = s1.append("_add.txt").c_str();
+	path = s1.append(".txt").c_str();
+	path_out = s1.c_str();
 	string chunk;
 	infile.open(path);
 	if(!infile){
@@ -94,54 +96,7 @@ void depad(string chunkname)
 		cout<<chunk<<endl;
 	}
 	
-	outfile.close();
 	outfile<< chunk<<endl;
+	outfile.close();
 }
 
-int main(){
-
-	int chunk_number = 3;
-	 
-	string input;
-	ifstream infile1,infile2;
-/*	ofstream outfile("data/SampleInputForProjectII/10-chrunk.txt");
-	infile1.open("data/SampleInputForProjectII/10-01.txt");
-	getline(infile1,input, '\0');
-	int l = input.length();
-	int i = 0;
-	cout << l <<endl;
-	while (i<=l)
-	{
-		string s=input.substr(i,100);
-		i+=100;
-		outfile<<s<<endl;
-	}
-	infile1.close();
-*/	
-
-	string chunkname;
-	int i = 1;
-	
-	while(i<=chunk_number){
-		chunkname = "chunk";
-		ostringstream c;
-		c<<i;
-		chunkname.append(c.str());
-		cout<<chunkname<<endl;
-		pad(chunkname);
-		cout<<endl;
-		i++;
-	}
-	i=1;
-	cout<<endl<<"depad"<<endl;
-	while(i<=chunk_number){
-		chunkname = "chunk";
-		ostringstream c;
-		c<<i;
-		chunkname.append(c.str());
-		cout<<chunkname<<endl;
-		depad(chunkname);
-		cout<<endl;
-		i++;
-	}
-}
