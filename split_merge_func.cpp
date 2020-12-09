@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include<numeric>
+#include <numeric>
 #include <typeinfo>
 
 using namespace std;
@@ -101,7 +101,8 @@ void mergeChunks(char const *filePath, string chunkName, char const *outputFileP
     outputFileStream.close();
 }
 
-int main() {
+//For individual testing
+/*int main() {
     //splitChunks("/Users/lujie/Desktop/testchunk.txt", "project.txt", "/Users/lujie/Desktop/test_out.txt");
     mergeChunks("/Users/lujie/Desktop/testchunk.txt", "chunk.txt", "/Users/lujie/Desktop/test_out.txt");
-}
+}*/
