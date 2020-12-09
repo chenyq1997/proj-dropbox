@@ -46,7 +46,10 @@ void filename::delete_from_fdict()
 /**********CHUNKNAME FUNCTIONS**********/
     
 /** CONSTRUCTORS **/
-chunkname::chunkname(){}
+chunkname::chunkname()
+{
+  count = 1;  //The newly added file will have this new chunk
+}
 chunkname::chunkname(char hashval[])
 {
   strcpy(name, hashval);  //Copy final hash value to chunk 
@@ -89,13 +92,17 @@ chunkname* find_chunkname(char query[])
 //Function to list entries in alphabetical order in filename_dict
 void list_aph_fdict()
 {
-  //Using uthash macro to sort dict
-  HASH_SORT(filename_dict, aph_sort);
-  //Listing the result
-  filename* iter;
-  int i = 1;
-  for(iter = filename_dict; iter != NULL; iter = (filename*) (iter->hh.next))
-    printf("%d.\t%s\n", i, iter->name);
+  if(filename_dict == NULL) cout << "The master storage is empty." << endl;
+  else
+  {
+    //Using uthash macro to sort dict
+    HASH_SORT(filename_dict, aph_sort);
+    //Listing the result
+    filename* iter;
+    int i = 1;
+    for(iter = filename_dict; iter != NULL; iter = (filename*) (iter->hh.next))
+      printf("%d.\t%s\n", i, iter->name);
+  }
 }
 
 //Alphabetical sort function required for sorting
@@ -104,12 +111,19 @@ int aph_sort(filename *a, filename *b)
   return strcmp(a->name, b->name);
 }
 
-//Function to update the item in chunkname_dict
-void update_count(char query[], int newcount)
+//Function to increase the item in chunkname_dict
+void count_up(char query[])
 {
   chunkname *res;
   res = find_chunkname(query);
-  if(res != NULL) res->count = newcount;
+  if(res != NULL) res->count++;
+}
+//Function to decrease the item in chunkname_dict
+void count_down(char query[])
+{
+  chunkname *res;
+  res = find_chunkname(query);
+  if(res != NULL) res->count--;
 }
 
 /**********WRAPPER FUNCTIONS**********/

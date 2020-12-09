@@ -8,9 +8,7 @@
 #include <typeinfo>
 
 // The components
-#include "dict.h"
-#include "split_merge_func.h"
-#include "pad.h"
+
 #include "op.h"
 
 using namespace std;
@@ -25,7 +23,7 @@ Usage:
 */
 int main(int argc, char** argv)
 {
-	if(argc == 1) cout << "Please enter a command line option." << endl;
+	if(argc == 1) cout << "Error: no command line option." << endl;
 	else if(argc == 2 && !strcmp(argv[1], "-l"))
 	{
 		//TODO: ListFiles

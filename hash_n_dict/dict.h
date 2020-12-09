@@ -73,8 +73,10 @@ chunkname* find_chunkname(char query[]);
 void list_aph_fdict();
 //Alphabetical sort function required for sorting
 int aph_sort(filename *a, filename *b);
-//Function to update the item in chunkname_dict
-void update_count(char query[], int newcount);
+//Function to increase the item in chunkname_dict
+void count_up(char query[]);
+//Function to decrease the item in chunkname_dict
+void count_down(char query[]);
 
 /**********WRAPPER FUNCTIONS**********/
 
