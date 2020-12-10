@@ -6,7 +6,13 @@
 
 using namespace std;
 
+char *filePathForLoad;
+char *outputFilePathForLoad;
+const int chunkSize = 1024;
+
+
+
 // split a file into serveral chunks
-void splitChunks(char const *filePath, string chunkName, char const *outputFilePath);
+void splitChunks(char *filePath, string chunkName, char *outputFilePath);
 //merge those individual chunks into same outputFile
-void mergeChunks(char const *filePath, string chunkName, char const *outputFilePath);
+void mergeChunks(char *filePath, string chunkName, char *outputFilePath);

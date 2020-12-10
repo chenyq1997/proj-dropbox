@@ -10,7 +10,7 @@ MY_INCLUDES = dict.h pad.h sha256.h split_merge_func.h uthash.h
 
 
 CCX = g++
-CXXFLAGS = -g -std=c++14
+CXXFLAGS = -g -std=c++11
 # -Wall
 
 #============================================================

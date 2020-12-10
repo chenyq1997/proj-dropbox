@@ -5,10 +5,9 @@
 #include <typeinfo>
 
 using namespace std;
-const int chunkSize = 10;
 
 // split a file into serveral chunks
-void splitChunks(char const *filePath, string chunkName, char const *outputFilePath) {
+void splitChunks(char *filePath, string chunkName, char *outputFilePath) {
     ifstream fileStream;
     // read in binary
     fileStream.open(filePath, ios::in | ios::binary);

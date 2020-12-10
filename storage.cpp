@@ -23,26 +23,34 @@ Usage:
 */
 int main(int argc, char** argv)
 {
+	/*
+	LoadStructures();
 	if(argc == 1) cout << "Error: no command line option." << endl;
 	else if(argc == 2 && !strcmp(argv[1], "-l"))
 	{
 		//TODO: ListFiles
+		ListStorage();
 	}
 	else if(argc == 3 && !strcmp(argv[1], "-s"))
 	{
 		//TODO: Store(Load)
+		LoadFile(,argv[2],);
 	}
 	else if(argc == 3 && !strcmp(argv[1], "-r"))
 	{
 		//TODO: Retrieve
+		RetrieveFile(argv[2]);
 	}
 	else if(argc == 3 && !strcmp(argv[1], "-d"))
 	{
 		//TODO: Delte
+		DeleteFile(argv[2]);
 	}
 	else
 	{
 		cout << "Parameter error." << endl;
 	}	
+	SaveStructures();
+	*/
 	return 0;
 }

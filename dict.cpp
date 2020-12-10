@@ -5,13 +5,15 @@ dict.cpp:
 Packaged dictionary structures and functions using uthash header (https://github.com/troydhanson/uthash).
 *********************/
 
-#define HashSize 256  //The expected length of Hash output (bits)
-#define HashByteSize HashSize / 8
+//#define HashSize 256  //The expected length of Hash output (bits)
+//#define HashByteSize HashSize / 8
 
 #include <string> //strcpy(), strcmp()
 #include "dict.h"
 #include "uthash.h"
 #include "sha256.h"
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -23,9 +25,9 @@ chunkname *chunkname_dict = NULL;
     
 /** CONSTRUCTORS **/
 filename::filename(){}
-filename::filename(char actual_name[])
+filename::filename(char* actual_name)
 {
-  strcpy(name, actual_name);  //Copy final hash value to chunk
+  strncpy(name, actual_name, 256);  //Copy final hash value to chunk
 }
 
 /** DICT OPERATIONS **/
@@ -50,9 +52,9 @@ chunkname::chunkname()
 {
   count = 1;  //The newly added file will have this new chunk
 }
-chunkname::chunkname(char hashval[])
+chunkname::chunkname(char* hashval)
 {
-  strcpy(name, hashval);  //Copy final hash value to chunk 
+  strncpy(name, hashval, HashByteSize);  //Copy final hash value to chunk 
   count = 1;  //The newly added file will have this new chunk
 }
 
@@ -74,14 +76,14 @@ void chunkname::delete_from_cdict()
 
 /**********DICT QUERY/LISTING**********/
 //The find and operations of two dictionaries
-filename* find_filename(char query[])
+filename* find_filename(char* query)
 {
   filename *res;
   //Using uthash macro
   HASH_FIND_STR(filename_dict, query, res);  //Input 1-3: dict, pointer to the query literal key, output pointer (NULL if not found).
   return res;
 }
-chunkname* find_chunkname(char query[])
+chunkname* find_chunkname(char* query)
 {
   chunkname *res;
   //Using uthash macro
@@ -112,14 +114,14 @@ int aph_sort(filename *a, filename *b)
 }
 
 //Function to increase the item in chunkname_dict
-void count_up(char query[])
+void count_up(char* query)
 {
   chunkname *res;
   res = find_chunkname(query);
   if(res != NULL) res->count++;
 }
 //Function to decrease the item in chunkname_dict
-void count_down(char query[])
+void count_down(char* query)
 {
   chunkname *res;
   res = find_chunkname(query);
@@ -129,11 +131,94 @@ void count_down(char query[])
 /**********WRAPPER FUNCTIONS**********/
 
 // Take in a segment of file (in char[]), sha256 hash then return the result to be used as name of the chunk
-char* sha256_segment(char input[])
+char* sha256_segment(char* input)
 {
   SHA256 sha256;
   string s = sha256(input);
   char* res = new char[HashByteSize];
   strncpy(res, s.c_str(), HashByteSize);
   return res;
+}
+
+void SaveStructures()
+{
+  //Save filename_dict
+  ofstream fs, cfs;
+  fs.open("filename_dict.sav", ios::out);
+    filename* iterf;
+    chunkname* iterc;
+    for(iterf = filename_dict; iterf != NULL; iterf = (filename*) (iterf->hh.next))
+    {
+      fs << iterf->name << endl;
+      cfs.open(strcat(iterf->name, ".sav"), ios::out);
+      Chunk *cptr = iterf->first;
+      while(cptr != NULL)
+      {
+        cfs << cptr->name << endl;
+      }
+      cfs.close();
+    }
+    fs.close();
+    //Save chunkname_dict
+    fs.open("chunkname_dict.sav", ios::out);
+    for(iterc = chunkname_dict; iterc != NULL; iterc = (chunkname*) (iterc->hh.next)) 
+    {
+      fs << iterc->name << endl;
+      fs << iterc->count << endl;
+    }
+}
+
+void LoadStructures()
+{
+  //Load filename_dict
+  ifstream fs, cfs;
+  fs.open("filename_dict.sav", ios::in);
+  char* rd;
+  char* ck;
+  chunkname* iterc;
+  filename* fn;
+  chunkname* cn;
+  Chunk* cptr;
+  if(fs.is_open()) 
+  {
+    //Load filename_dict
+    while(!fs.eof())
+    {
+      fs >> rd;
+      cfs.open(strcat(iterc->name, ".sav"), ios::out);
+      if(cfs.is_open())
+      {
+        fn = new class filename;
+        strncpy(fn->name, rd, 256);
+        cptr = new class Chunk;
+        fn->first = cptr;
+        while(!cfs.eof())
+        {
+          cfs >> ck;
+          strncpy(cptr->name, ck, HashByteSize);
+          cptr->next = new class Chunk;
+          cptr = cptr->next;
+        }
+        //Now there will be one Chunk allocated too much
+        delete cptr;
+        fn->add_to_fdict();
+      }
+      cfs.close();
+    }
+  }
+  fs.close();
+
+  //Load chunkname_dict
+  fs.open("chunkname_dict.sav", ios::in);
+  if(fs.is_open())
+  {
+    while(!fs.eof())
+    {
+      cn = new class chunkname;
+      fs >> cn->name;
+      fs >> cn->count;
+      cn->add_to_cdict();
+    }
+  }
+  fs.close();
 }
