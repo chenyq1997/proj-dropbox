@@ -1,4 +1,4 @@
-#include "split_merge_func.h"
+#include <iostream>
 using namespace std;
 
 

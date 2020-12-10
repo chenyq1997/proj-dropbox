@@ -22,8 +22,8 @@ void LoadFile(char *fileName, char  *filePath, char  *outputFilePath) {
     leftLength = fileStream.tellg();
 
 
-    char *filePathForLoad = filePath;
-    char *outputFilePathForLoad = outputFilePath;
+    filePathForLoad = filePath;
+    outputFilePathForLoad = outputFilePath;
 
 
     filename *file_name = new filename(fileName);

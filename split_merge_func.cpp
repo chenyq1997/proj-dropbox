@@ -3,11 +3,12 @@
 #include <string>
 #include <numeric>
 #include <typeinfo>
+#include "split_merge_func.h"
 
 using namespace std;
 
 // split a file into serveral chunks
-void splitChunks(char *filePath, string chunkName, char *outputFilePath) {
+void splitChunks(char *filePath, char* chunkName, char *outputFilePath) {
     ifstream fileStream;
     // read in binary
     fileStream.open(filePath, ios::in | ios::binary);
@@ -58,7 +59,12 @@ void splitChunks(char *filePath, string chunkName, char *outputFilePath) {
         delete[] restFileBuffer;
         fileStream.close();
 
+        filePathForLoad = outputFilePath;
+        outputFilePathForLoad = filePath;
+
         cout << "chunking success" << endl;
+        cout << "input file: " << filePathForLoad << endl;
+        cout << "output file: " << filePath << endl;
     }
     else {
         cout << "Error opening the file" << endl;
