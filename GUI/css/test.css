@@ -1,0 +1,21 @@
+.main{
+	text-align: center;
+	background-color: #fff;
+	border-radius: 20px;
+	height: 900px;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+th,td{
+	padding:5px;
+	text-align: center;
+	font-size: 20px;
+}
+input{
+	text-align: center;
+	font-size: 18px;
+}

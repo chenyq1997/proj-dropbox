@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
+		<link href="http://www.shz260.com/css/bootstrap.min.css" rel="stylesheet">
+		<script type = "text/javascript" src = "js/test.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/test.css">
+		<title>Demo for Dropboxer</title>
+	</head>
+	<body>
+
+		<div class="main">
+			<h2>Dropboxer</h2>
+			<br>
+			
+			<table border="1" align="center">
+				<tr>
+					<th>file number</th>
+					<th>upload files</th>
+					<th style="padding-left: 50px; padding-right: 50px;">size</th>
+				</tr>
+				<tr>
+					<td>
+						<h5>1</h5>
+					</td>
+					<td>
+						<input type="file" id="file1" accept=".txt" onchange="upload(1);"/>
+					</td>
+					<td>
+						<h5 id="size1">0</h5>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h5>2</h5>
+					</td>
+					<td>
+						<input type="file" id="file2" accept=".txt" onchange="upload(2);"/>
+					</td>
+					<td>
+						<h5 id="size2">0</h5>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h5>3</h5>
+					</td>
+					<td>
+						<input type="file" id="file3" accept=".txt" onchange="upload(3);"/>
+					</td>
+					<td>
+						<h5 id="size3">0</h5>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h5>4</h5>
+					</td>
+					<td>
+						<input type="file" id="file4" accept=".txt" onchange="upload(4);"/>
+					</td>
+					<td>
+						<h5 id="size4">0</h5>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h5>5</h5>
+					</td>
+					<td>
+						<input type="file" id="file5" accept=".txt" onchange="upload(5);"/>
+					</td>
+					<td>
+						<h5 id="size5">0</h5>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h5>6</h5>
+					</td>
+					<td>
+						<input type="file" id="file6" accept=".txt" onchange="upload(6);"/>
+					</td>
+					<td>
+						<h5 id="size6">0</h5>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h5>7</h5>
+					</td>
+					<td>
+						<input type="file" id="file7" accept=".txt" onchange="upload(7);"/>
+					</td>
+					<td>
+						<h5 id="size7">0</h5>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h5>8</h5>
+					</td>
+					<td>
+						<input type="file" id="file8" accept=".txt" onchange="upload(8);"/>
+					</td>
+					<td>
+						<h5 id="size8">0</h5>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h5>9</h5>
+					</td>
+					<td>
+						<input type="file" id="file9" accept=".txt" onchange="upload(9);"/>
+					</td>
+					<td>
+						<h5 id="size9">0</h5>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h5>10</h5>
+					</td>
+					<td>
+						<input type="file" id="file10" accept=".txt" onchange="upload(10);"/>
+					</td>
+					<td>
+						<h5 id="size10">0</h5>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<input type="button" value="Store!" onclick="dropbox();" />
+			<br><br>
+			<table border="1" align="center" id="tab">
+				<tr>
+					<th>chunk numbers</th>
+					<th style="padding-left: 20px; padding-right: 20px;">original size</th>
+					<th style="padding-left: 20px; padding-right: 20px;">compressed size</th>
+				</tr>
+				<tr>
+					<td>
+						<h5 id="filesize">0</h5>
+					</td>
+					<td>
+						<h5 id="orsize">0</h5>
+					</td>
+					<td>
+						<h5 id="comsize">0</h5>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+	</body>
+</html>
